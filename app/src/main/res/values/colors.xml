@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9E9E9E</color>
+    <color name="colorPrimaryDark">#424242</color>
+    <color name="colorAccent">#FF5722</color>
+    <color name="delete_bg">#FBC02D</color>
+    <color name="room_title">#BDBDBD</color>
+    <color name="darkText">#212121</color>
+</resources>

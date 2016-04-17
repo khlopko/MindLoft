@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="thing_types_array">
+        <item>Text</item>
+        <item>Link</item>
+        <item>Image</item>
+    </array>
+</resources>
