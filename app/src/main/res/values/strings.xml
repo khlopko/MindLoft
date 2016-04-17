@@ -7,4 +7,8 @@
     <string name="link_title">Link</string>
     <string name="reload">Reload</string>
     <string name="in_browser">Open in browser</string>
+    <string name="delete">Delete</string>
+    <string name="text_item">Text</string>
+    <string name="link_item">Link</string>
+    <string name="image_item">Image</string>
 </resources>

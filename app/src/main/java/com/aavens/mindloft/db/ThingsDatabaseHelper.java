@@ -5,15 +5,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class ThingsDatabaseHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "Things.db";
+    private static final int DATABASE_VERSION = 3;
+    private static final String DATABASE_NAME = "Rooms.db";
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA = ",";
     private static final String SQL_CREATE = "CREATE TABLE " + ThingContract.ThingEntry.TABLE_NAME + "( " +
             ThingContract.ThingEntry._ID + " INTEGER PRIMARY KEY, " +
-            ThingContract.ThingEntry.COLUMN_NAME_ID + TEXT_TYPE + COMMA +
-            ThingContract.ThingEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA +
             ThingContract.ThingEntry.COLUMN_NAME_VALUE_TYPE + TEXT_TYPE + COMMA +
             ThingContract.ThingEntry.COLUMN_NAME_VALUE + TEXT_TYPE + COMMA +
             ThingContract.ThingEntry.COLUMN_NAME_ROOM_ID + TEXT_TYPE + COMMA +

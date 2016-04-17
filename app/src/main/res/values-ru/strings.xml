@@ -8,4 +8,8 @@
     <string name="room_title_hint">Введите название</string>
     <string name="in_browser">В браузере</string>
     <string name="reload">Перезагрузить</string>
+    <string name="delete">Удалить</string>
+    <string name="image_item">Изображение</string>
+    <string name="link_item">Ссылка</string>
+    <string name="text_item">Текст</string>
 </resources>

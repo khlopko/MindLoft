@@ -47,7 +47,6 @@ public class ThingsManager extends Observable {
     public void append(Thing thing) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ThingContract.ThingEntry.COLUMN_NAME_TITLE, thing.getTitle());
         values.put(ThingContract.ThingEntry.COLUMN_NAME_ROOM_ID, thing.getRoomId());
         values.put(ThingContract.ThingEntry.COLUMN_NAME_VALUE, thing.getData());
         values.put(ThingContract.ThingEntry.COLUMN_NAME_VALUE_TYPE, thing.getType().ordinal());
@@ -119,7 +118,6 @@ public class ThingsManager extends Observable {
         String[] projection = {
                 ThingContract.ThingEntry._ID,
                 ThingContract.ThingEntry.COLUMN_NAME_ROOM_ID,
-                ThingContract.ThingEntry.COLUMN_NAME_TITLE,
                 ThingContract.ThingEntry.COLUMN_NAME_VALUE,
                 ThingContract.ThingEntry.COLUMN_NAME_VALUE_TYPE,
                 ThingContract.ThingEntry.COLUMN_NAME_DATE
@@ -146,8 +144,6 @@ public class ThingsManager extends Observable {
         do {
             long id = cursor.getLong(cursor
                     .getColumnIndexOrThrow(ThingContract.ThingEntry._ID));
-            String title = cursor.getString(cursor
-                    .getColumnIndexOrThrow(ThingContract.ThingEntry.COLUMN_NAME_TITLE));
             String value = cursor.getString(cursor
                     .getColumnIndexOrThrow(ThingContract.ThingEntry.COLUMN_NAME_VALUE));
             int typeRaw = cursor.getInt(cursor
@@ -155,7 +151,7 @@ public class ThingsManager extends Observable {
             Thing.Type type = Thing.Type.values()[typeRaw];
             long roomId = cursor.getLong(cursor
                     .getColumnIndexOrThrow(ThingContract.ThingEntry.COLUMN_NAME_ROOM_ID));
-            Thing thing = new Thing(id, title, type, value, roomId);
+            Thing thing = new Thing(id, type, value, roomId);
             things.add(thing);
         } while (cursor.moveToNext());
         setChanged();

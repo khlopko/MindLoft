@@ -3,21 +3,18 @@ package com.aavens.mindloft.models;
 public class Thing {
 
     private long id;
-    private String title;
     private Type type;
     private String data;
     private long roomId;
 
-    public Thing(long id, String title, Type type, String data, long roomId) {
+    public Thing(long id, Type type, String data, long roomId) {
         this.id = id;
-        this.title = title;
         this.type = type;
         this.data = data;
         this.roomId = roomId;
     }
 
-    public Thing(String title, Type type, String data, long roomId) {
-        this.title = title;
+    public Thing(Type type, String data, long roomId) {
         this.type = type;
         this.data = data;
         this.roomId = roomId;
@@ -25,9 +22,6 @@ public class Thing {
 
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
-
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
 
     public String getData() { return data; }
     public void setData(String data) { this.data = data; }

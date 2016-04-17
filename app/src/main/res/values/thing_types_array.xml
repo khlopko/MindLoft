@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="thing_types_array">
-        <item>Text</item>
-        <item>Link</item>
-        <item>Image</item>
+        <item>@string/text_item</item>
+        <item>@string/link_item</item>
+        <item>@string/image_item</item>
     </array>
 </resources>

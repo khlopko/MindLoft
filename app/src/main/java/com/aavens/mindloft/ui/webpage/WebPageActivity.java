@@ -13,8 +13,6 @@ import android.webkit.WebViewClient;
 
 import com.aavens.mindloft.R;
 
-import java.net.URL;
-
 public class WebPageActivity extends AppCompatActivity {
     public static final String URL_EXTRA = "com.aavens.mindloft.ui.webpage.URL_EXTRA";
 
@@ -80,9 +78,6 @@ public class WebPageActivity extends AppCompatActivity {
 
     private void loadUrl() {
         url = getIntent().getStringExtra(URL_EXTRA);
-        if (!url.startsWith("http://") || !url.startsWith("https://")) {
-            url = "http://" + url;
-        }
         webView.loadUrl(url);
     }
 

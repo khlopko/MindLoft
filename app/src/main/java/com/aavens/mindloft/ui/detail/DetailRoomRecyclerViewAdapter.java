@@ -41,7 +41,7 @@ public class DetailRoomRecyclerViewAdapter
     }
 
     public void addThingWithType(long roomId, Thing.Type type, String value) {
-        Thing thing = new Thing("", type, value, roomId);
+        Thing thing = new Thing(type, value, roomId);
         manager.append(thing);
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="room_actions_array">
-        <item>Delete</item>
+        <item>@string/delete</item>
     </array>
 </resources>

@@ -8,4 +8,8 @@
     <string name="room_title_hint">Введіть назву</string>
     <string name="in_browser">Відкрити у броузері</string>
     <string name="reload">Перевантажити</string>
+    <string name="delete">Видалити</string>
+    <string name="image_item">Зображення</string>
+    <string name="link_item">Посилання</string>
+    <string name="text_item">Текст</string>
 </resources>
