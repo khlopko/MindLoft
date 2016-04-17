@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:MindLoft="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.webpage.WebPageActivity">
+    <item
+        android:id="@+id/reload"
+        android:icon="@drawable/ic_loop_white_24dp"
+        MindLoft:showAsAction="ifRoom"
+        android:title="@string/reload" />
+    <item
+        android:id="@+id/in_browser"
+        android:icon="@drawable/ic_open_in_browser_white_24dp"
+        MindLoft:showAsAction="ifRoom"
+        android:title="@string/in_browser" />
+</menu>

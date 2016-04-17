@@ -9,7 +9,7 @@
         android:id="@+id/link_card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="54dp"
         android:layout_margin="2dp"
         card_view:cardElevation="2dp"
         card_view:cardCornerRadius="0dp">

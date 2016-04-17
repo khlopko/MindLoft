@@ -40,7 +40,7 @@ public class RoomActionsDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         index = getArguments().getInt(INDEX_ARG);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Choose action");
+        builder.setTitle(R.string.choose_dialog_title);
         builder.setItems(R.array.room_actions_array, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

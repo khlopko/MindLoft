@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MindLoft</string>
+    <string name="cancel">Відмінити</string>
+    <string name="choose_dialog_title">Оберіть дію</string>
+    <string name="done">Ок</string>
+    <string name="link_title">Посилання</string>
+    <string name="room_title_hint">Введіть назву</string>
+    <string name="in_browser">Відкрити у броузері</string>
+    <string name="reload">Перевантажити</string>
+</resources>

@@ -1,5 +1,8 @@
 package com.aavens.mindloft.listeners;
 
+import com.aavens.mindloft.models.Thing;
+
 public interface OnThingClickListener {
-    void onItemLongClick(Integer index);
+    void onItemClick(Thing thing);
+    void onItemLongClick(int index);
 }

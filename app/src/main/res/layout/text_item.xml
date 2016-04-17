@@ -24,13 +24,13 @@
             android:inputType="text"
             android:background="@android:color/transparent"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/remove_text_item_button"
             android:background="@color/delete_bg"
             android:textColor="@android:color/white"
             android:layout_width="44dp"
             android:layout_height="match_parent"
-            android:text="X"
+            android:src="@drawable/ic_clear_white_18dp"
             android:layout_gravity="right"/>
 
     </android.support.v7.widget.CardView>

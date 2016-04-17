@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">MindLoft</string>
-    <string name="action_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="room_title_hint">Enter room name</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="choose_dialog_title">Choose action</string>
+    <string name="link_title">Link</string>
+    <string name="reload">Reload</string>
+    <string name="in_browser">Open in browser</string>
 </resources>

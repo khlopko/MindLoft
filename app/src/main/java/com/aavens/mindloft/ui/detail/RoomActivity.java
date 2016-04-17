@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 
 import com.aavens.mindloft.R;
 import com.aavens.mindloft.listeners.DialogFragmentActionsListener;
+import com.aavens.mindloft.listeners.LinkEditDialogActionsListener;
 import com.aavens.mindloft.listeners.OnThingClickListener;
 import com.aavens.mindloft.listeners.ThingsTypeDialogListener;
 import com.aavens.mindloft.managers.RoomsManager;
@@ -26,6 +28,7 @@ import com.aavens.mindloft.managers.ThingsManager;
 import com.aavens.mindloft.models.Room;
 import com.aavens.mindloft.models.Thing;
 import com.aavens.mindloft.ui.main.RoomActionsDialogFragment;
+import com.aavens.mindloft.ui.webpage.WebPageActivity;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -38,7 +41,8 @@ public class RoomActivity
         Observer,
         OnThingClickListener,
         ThingsTypeDialogListener,
-        DialogFragmentActionsListener {
+        DialogFragmentActionsListener,
+        LinkEditDialogActionsListener {
 
     public static final String EXTRA_ROOM_INDEX = "com.aavens.mindloft.ui.detail.EXATRA_ROOM_INDEX";
 
@@ -53,9 +57,12 @@ public class RoomActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(" ");
         }
         initActivity();
         initRecyclerView();
@@ -105,9 +112,16 @@ public class RoomActivity
     }
 
     // MARK: OnThingClickListener
+    
+    @Override
+    public void onItemClick(Thing thing) {
+        Intent intent = new Intent(this, WebPageActivity.class);
+        intent.putExtra(WebPageActivity.URL_EXTRA, thing.getData());
+        startActivity(intent);
+    }
 
     @Override
-    public void onItemLongClick(Integer index) {
+    public void onItemLongClick(int index) {
         RoomActionsDialogFragment fragment = RoomActionsDialogFragment.newInstance(index, this);
         fragment.show(getFragmentManager(), "RoomActionsDialogFragment");
     }
@@ -124,11 +138,25 @@ public class RoomActivity
     @Override
     public void onThingTypeInteraction(Integer index) {
         Thing.Type type = Thing.Type.values()[index];
-        if (type == Thing.Type.IMAGE) {
-            openImagePick();
-        } else {
-            ((DetailRoomRecyclerViewAdapter) adapter).addThingWithType(room.getId(), type, null);
+        switch (type) {
+            case TEXT:
+                ((DetailRoomRecyclerViewAdapter) adapter).addThingWithType(room.getId(), type, null);
+                break;
+            case LINK:
+                showLinkEditDialog();
+                break;
+            case IMAGE:
+                openImagePick();
+                break;
         }
+    }
+
+    // MARK: LinkEditDialogActionsListener
+
+    @Override
+    public void onDoneClick(String url) {
+        DetailRoomRecyclerViewAdapter detailAdapter = (DetailRoomRecyclerViewAdapter) adapter;
+        detailAdapter.addThingWithType(room.getId(), Thing.Type.LINK, url);
     }
 
     // MARK: Observer
@@ -210,5 +238,10 @@ public class RoomActivity
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, RESULT_PHOTO);
+    }
+
+    private void showLinkEditDialog() {
+        LinkEditDialogFragment fragment = LinkEditDialogFragment.newInstance(this);
+        fragment.show(getFragmentManager(), "LinkEditDialogFragment");
     }
 }

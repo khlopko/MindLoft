@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -74,41 +74,16 @@ public class DetailRoomRecyclerViewAdapter
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mView.setOnLongClickListener(holder);
-        Thing thing = manager.get(position);
-        switch (thing.getType()) {
+        Thing.Type type = manager.get(position).getType();
+        switch (type) {
             case TEXT:
-                holder.editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_DONE) {
-                            manager.update(holder.getAdapterPosition(),
-                                    holder.editText.getText().toString());
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                holder.button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        manager.removeAtIndex(holder.getAdapterPosition());
-                    }
-                });
-                holder.editText.setText(thing.getData());
+                bindTextView(position, holder);
                 break;
             case LINK:
-                holder.textView.setText(thing.getData());
+                bindLinkView(position, holder);
                 break;
             case IMAGE:
-                Uri uri = Uri.fromFile(new File(thing.getData()));
-                final InputStream imageStream;
-                try {
-                    imageStream = context.getContentResolver().openInputStream(uri);
-                    final Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
-                    holder.imageView.setImageBitmap(bitmap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                bindImageView(position, holder);
                 break;
         }
     }
@@ -128,7 +103,7 @@ public class DetailRoomRecyclerViewAdapter
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         public final View mView;
         public final EditText editText;
-        public final Button button;
+        public final ImageButton button;
         public final TextView textView;
         public final ImageView imageView;
 
@@ -138,13 +113,64 @@ public class DetailRoomRecyclerViewAdapter
             editText = (EditText) view.findViewById(R.id.thing_text);
             textView = (TextView) view.findViewById(R.id.link_text);
             imageView = (ImageView) view.findViewById(R.id.image_view);
-            button = (Button) view.findViewById(R.id.remove_text_item_button);
+            button = (ImageButton) view.findViewById(R.id.remove_text_item_button);
         }
 
         @Override
         public boolean onLongClick(View v) {
             listener.onItemLongClick(getAdapterPosition());
             return false;
+        }
+    }
+
+    // MARK: Private
+
+    private void bindTextView(final int position, final ViewHolder holder) {
+        Thing thing = manager.get(position);
+        holder.editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    manager.update(holder.getAdapterPosition(),
+                            holder.editText.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manager.removeAtIndex(holder.getAdapterPosition());
+            }
+        });
+        holder.editText.setText(thing.getData());
+    }
+
+    private void bindLinkView(final int position, final ViewHolder holder) {
+        Thing thing = manager.get(position);
+        holder.textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int p = holder.getAdapterPosition();
+                Thing innerThing = manager.get(p);
+                listener.onItemClick(innerThing);
+            }
+        });
+        holder.textView.setOnLongClickListener(holder);
+        holder.textView.setText(thing.getData());
+    }
+
+    private void bindImageView(final int position, final ViewHolder holder) {
+        Thing thing = manager.get(position);
+        Uri uri = Uri.fromFile(new File(thing.getData()));
+        final InputStream imageStream;
+        try {
+            imageStream = context.getContentResolver().openInputStream(uri);
+            final Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+            holder.imageView.setImageBitmap(bitmap);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

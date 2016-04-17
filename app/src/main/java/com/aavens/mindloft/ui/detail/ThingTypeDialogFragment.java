@@ -28,7 +28,7 @@ public class ThingTypeDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Choose action");
+        builder.setTitle(R.string.choose_dialog_title);
         builder.setItems(R.array.thing_types_array, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
