@@ -1,7 +1,11 @@
 package com.aavens.mindloft.models
 
-/**
- * Created by aavens on 29.05.2016.
- */
-class Thing {
+data class Thing(var id: Long, var type: Type, var data: String = "", var roomId: Long) {
+    constructor(type: Type, data: String, roomId: Long) : this(-1, type, data, roomId)
+
+    enum class Type {
+        TEXT,
+        LINK,
+        IMAGE
+    }
 }
